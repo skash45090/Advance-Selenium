@@ -3,6 +3,8 @@ package vTiger.GenericLibrary;
 import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -155,6 +157,27 @@ public class WebDriverLibrary
 		r.keyPress(KeyEvent.VK_ENTER);
 		r.keyRelease(KeyEvent.VK_ENTER);		
 }
+	public void switchToWindow(WebDriver driver ,String partialWindowTitle)
+	{
+		// get all the window handles
+		Set<String> windowIds = driver.getWindowHandles();
+		//iterate through all the windows id-- similar to for each loop
+		Iterator<String> it = windowIds.iterator();
+		// navigate to each window and check the title
+		while(it.hasNext())
+		{
+			String winID = it.next();
+			
+			String currentTitle = driver.switchTo().window(winID).getTitle();
+			// compare current title with partial title
+			if(currentTitle.contains(partialWindowTitle))
+			{
+				break;
+			}
+		}
+		
+		
+	}
 	
 	
 	
