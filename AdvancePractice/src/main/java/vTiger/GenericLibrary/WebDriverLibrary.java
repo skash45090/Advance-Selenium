@@ -1,5 +1,8 @@
 package vTiger.GenericLibrary;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -106,10 +109,52 @@ public class WebDriverLibrary
 		Actions act=new Actions(driver);
 		act.moveByOffset(xoff, yoff);
 	}
-	
-	
-	
-	
+	// switch frame action 
+	public void switchToFrame(WebDriver driver,int index)
+	{
+		driver.switchTo().frame(index);
+	}
+	// this method will switch to frame based on name or id
+	public void switchToFrame(WebDriver driver,String nameOrId)
+	{
+		driver.switchTo().frame(nameOrId); 
+	}
+	public void switchToFrame(WebDriver driver,WebElement element)	
+	{
+		driver.switchTo().frame(element);
+	}
+	//this method will switch from current frame to immediate parent
+	public void switchToParentFrame(WebDriver driver)
+	{
+		driver.switchTo().parentFrame();
+	}
+	// this method will switch back or default frame 
+	public void switchToDefaultFrame(WebDriver driver)
+	{
+		driver.switchTo().defaultContent();
+	}
+	// this method will click on accept or cancel in alert pop up
+	public void acceptAlert(WebDriver driver)
+	{
+		driver.switchTo().alert().accept();
+	}
+	public void dismisAlert(WebDriver driver)
+	{
+		driver.switchTo().alert().dismiss();
+	}
+	//this method will return the text of alert pop up to the caller
+	public String getAlertText(WebDriver driver)
+	{
+		String alertText = driver.switchTo().alert().getText();
+		return alertText;
+	}
+	// this method will press the enter key
+	public void pressEnter() throws AWTException
+	{
+		Robot r=new Robot();
+		r.keyPress(KeyEvent.VK_ENTER);
+		r.keyRelease(KeyEvent.VK_ENTER);		
+}
 	
 	
 	
